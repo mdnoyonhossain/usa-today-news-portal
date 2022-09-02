@@ -22,12 +22,11 @@ const displayCategory = categories => {
 // Category Id 
 const categoryNews = id => {
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
-    console.log(url);
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategoryNews(data.data))
         .catch(error => alert(error))
-        loaderSpinner(true)
+    loaderSpinner(true)
 }
 
 // News Show 
@@ -35,6 +34,11 @@ const displayCategoryNews = news => {
     // News Count 
     const newsCount = document.getElementById('news-count');
     newsCount.innerText = `${news.length} items found for category Entertainment`;
+
+    // Object Of array Sort 
+    news.sort((a, b) => {
+        return b.total_view - a.total_view;
+    });
 
     // News Or Blog 
     const newsContainer = document.getElementById('news-container');
@@ -119,10 +123,10 @@ const displayDetailsNewsModal = info => {
 // Load Spinner 
 const loaderSpinner = isLoading => {
     const loading = document.getElementById('loader-spinner');
-    if(isLoading){
+    if (isLoading) {
         loading.classList.remove('d-none');
     }
-    else{
+    else {
         loading.classList.add('d-none');
     }
 }
