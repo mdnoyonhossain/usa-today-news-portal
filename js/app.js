@@ -22,6 +22,7 @@ const categoryNews = id => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategoryNews(data.data))
+        loaderSpinner(true)
 }
 
 const displayCategoryNews = news => {
@@ -72,7 +73,8 @@ const displayCategoryNews = news => {
         </div>
         `;
         newsContainer.appendChild(blogDiv);
-    })
+    });
+    loaderSpinner(false);
 }
 
 const displayDetailsNews = detailsNews => {
@@ -83,7 +85,7 @@ const displayDetailsNews = detailsNews => {
 }
 
 const displayDetailsNewsModal = info => {
-    console.log(info);
+    console.log(info.data);
     const { title, image_url, author, details, total_view } = info;
     const modalContainer = document.getElementById('modal-container');
     modalContainer.innerHTML = `
@@ -102,6 +104,16 @@ const displayDetailsNewsModal = info => {
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
     `;
+}
+
+const loaderSpinner = isLoading => {
+    const loading = document.getElementById('loader-spinner');
+    if(isLoading){
+        loading.classList.remove('d-none');
+    }
+    else{
+        loading.classList.add('d-none');
+    }
 }
 
 loadCategory();
