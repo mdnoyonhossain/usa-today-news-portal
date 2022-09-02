@@ -3,8 +3,10 @@ const loadCategory = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategory(data.data.news_category))
+        .catch(error => alert(error))
 }
 
+// Display Category 
 const displayCategory = categories => {
     const categoryContainer = document.getElementById('category-container');
     categories.forEach(category => {
@@ -17,15 +19,23 @@ const displayCategory = categories => {
     });
 }
 
+// Category Id 
 const categoryNews = id => {
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategoryNews(data.data))
+        .catch(error => alert(error))
         loaderSpinner(true)
 }
 
+// News Show 
 const displayCategoryNews = news => {
+    // News Count 
+    const newsCount = document.getElementById('news-count');
+    newsCount.innerText = `${news.length} items found for category Entertainment`;
+
+    // News Or Blog 
     const newsContainer = document.getElementById('news-container');
     newsContainer.textContent = '';
     news.forEach(blog => {
@@ -77,15 +87,16 @@ const displayCategoryNews = news => {
     loaderSpinner(false);
 }
 
-const displayDetailsNews = detailsNews => {
-    const url = `https://openapi.programming-hero.com/api/news/${detailsNews}`;
+const displayDetailsNews = detailsNewsId => {
+    const url = `https://openapi.programming-hero.com/api/news/${detailsNewsId}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayDetailsNewsModal(data.data[0]))
+        .catch(error => alert(error))
 }
 
+// Detaile News Modal Show 
 const displayDetailsNewsModal = info => {
-    console.log(info.data);
     const { title, image_url, author, details, total_view } = info;
     const modalContainer = document.getElementById('modal-container');
     modalContainer.innerHTML = `
@@ -106,6 +117,7 @@ const displayDetailsNewsModal = info => {
     `;
 }
 
+// Load Spinner 
 const loaderSpinner = isLoading => {
     const loading = document.getElementById('loader-spinner');
     if(isLoading){
