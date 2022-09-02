@@ -1,3 +1,23 @@
+body{
+    background-color: #F6F6F6;
+}
 .logo{
     height: 50px;
+}
+.category{
+    text-decoration: none;
+    color: gray; 
+}
+.category:hover{
+    color: blue;
+}
+.description{
+    color: gray;
+}
+.graycolor{
+    color: gray;
+}
+.card{
+    border: none;
+    box-shadow: 10px 10px 30px lightgrey;
 }
