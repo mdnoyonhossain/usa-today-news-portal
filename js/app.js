@@ -11,9 +11,9 @@ const displayCategory = categories => {
     const categoryContainer = document.getElementById('category-container');
     categories.forEach(category => {
         const categoryDiv = document.createElement('div');
-        categoryDiv.classList.add('p-3');
+        categoryDiv.classList.add('col');
         categoryDiv.innerHTML = `
-            <div onclick="categoryNews('${category.category_id}')" class="category" style="cursor: pointer;">${category.category_name}</div>
+            <div onclick="categoryNews('${category.category_id}')" class="p-3 category text-size-category" style="cursor: pointer;">${category.category_name}</div>
         `;
         categoryContainer.appendChild(categoryDiv);
     });
@@ -58,18 +58,16 @@ const displayCategoryNews = news => {
                                 <img style="height: 50px; width: 50px; border-radius: 50px" src="${author.img ? author.img : "No Author Image Available"}" alt="">
                             </div>
                             <div class="ms-2">
-                                <p style="margin: 0;" class="fw-bold">${author.name ? author.name : "No Author Available"}</p>
+                                <p style="margin: 0;" class="fw-bold">${author.name ? author.name : "Not Author Available"}</p>
                                 <span class="graycolor">${author.published_date ? author.published_date : "No Date Available"}</span>
                             </div>
                         </div>
                         <div class="">
                             <i class="fa-solid fa-eye"></i>
-                            <p class="d-inline fw-bold">${total_view ? total_view : "No Viwer"}</p>
+                            <p class="d-inline fw-bold">${total_view ? total_view : "No View"}</p>
                         </div>
                         <div class="">
                         <i class="fa-solid fa-star-half-stroke"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                         <i class="fa-regular fa-star"></i>
                         ${rating.number ? rating.number : "No rating"}
@@ -106,10 +104,10 @@ const displayDetailsNewsModal = info => {
         </div>
         <div class="modal-body">
         <img class="img-fluid mb-2" src="${image_url}" alt="">
-        <p><b>Reporter:</b> ${author.name ? author.name : "No Viwer"}</p>
+        <p><b>Reporter:</b> ${author.name ? author.name : "Not Repoter"}</p>
         <p><b>Publish Date:</b> ${author.published_date ? author.published_date : "Not Found"}</p>
         <p><b>Details:</b> ${details ? details : "Not Found"}</p>
-        <p><b>Total Vies:</b> ${total_view ? total_view : "No Viwer"}</p>
+        <p><b>Total Vies:</b> ${total_view ? total_view : "No View"}</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
